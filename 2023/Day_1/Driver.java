@@ -1,29 +1,26 @@
 import java.util.ArrayList;
 
 /**
---- Day 3: Perfectly Spherical Houses in a Vacuum ---
+--- Day 1: Trebuchet?! ---
 
-Santa is delivering presents to an infinite two-dimensional grid of houses.
+Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
 
-He begins by delivering a present to the house at his starting location, and then an elf 
-at the North Pole calls him via radio and tells him where to move next. 
-Moves are always exactly one house to the north (^), south (v), east (>), or west (<). 
-After each move, he delivers another present to the house at his new location.
+You've been doing this long enough to know that to restore snow operations, you need to check all fifty stars by December 25th.
 
-However, the elf back at the north pole has had a little too much eggnog, 
-and so his directions are a little off, and Santa ends up visiting some houses more than once. 
-How many houses receive at least one present?
+Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
 
-For example:
+You try to ask why they can't just use a weather machine ("not powerful enough") and where they're even sending you ("the sky") and why your map looks mostly blank ("you sure ask a lot of questions") and hang on did you just say the sky ("of course, where do you think snow comes from") when you realize that the Elves are already loading you into a trebuchet ("please hold still, we need to strap you in").
 
-    > delivers presents to 2 houses: one at the starting location, and one to the east.
-    ^>v< delivers presents to 4 houses in a square, including twice to the house at his starting/ending location.
-    ^v^v^v^v^v delivers a bunch of presents to some very lucky children at only 2 houses.
+As they're making the final adjustments, they discover that their calibration document (your puzzle input) has been amended by a very young Elf who was apparently just excited to show off her art skills. Consequently, the Elves are having trouble reading the values on the document.
+
+The newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover. On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
 */
 
 
 public class Driver{
-    
+	
+	public static final String[] DIGITS = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+	
     public static void main(String[] args) throws Exception {
     	Parser parse = new Parser(args);
     	
@@ -38,6 +35,9 @@ public class Driver{
    		    char last = ' ';
     		
     		for(int j = 0; j < line.length();j++) {
+    			
+    			
+    			
     		   if(Character.isDigit(line.charAt(j)) && isFirst){
     		      isFirst = false;
     		      first = line.charAt(j);
