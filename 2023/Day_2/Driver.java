@@ -41,56 +41,115 @@ public class Driver{
 	
     public static void main(String[] args) throws Exception {
     	Parser parse = new Parser(args);
-    	
     	ArrayList<String> input = parse.getInput();
+    	part1(input);
+    	part2(input);
+    }
+    
+    public static void part2(ArrayList<String> input) {
     	
-    	String str = input.get(0);
+    	int cubeSum = 0;
     	
-    	boolean possible = false;
-    	
-    	String[] strArray = str.split(" ");
-    	for(int i = 2; i < strArray.length;i+=2) {
-    		int red = 0;
-    		int green = 0;
-    		int blue = 0;
+    	for(int j = 0;j<input.size();j++) {
+    		String str = input.get(j);
+    		String[] strArray = str.split(" ");
     		
-    		System.out.println(strArray[i]);
+    		int min_red = -1;
+    		int min_blue = -1;
+    		int min_green = -1;
     		
-    		if(strArray[i+1].charAt(0) == 'r') {
-//    			System.out.println("RED");
-    		} else if(strArray[i+1].charAt(0) == 'b') {
-//    			System.out.println("BLUE");
-    		} else if(strArray[i+1].charAt(0) == 'g') {
-//    			System.out.println("GREEN");
+    		for(int i = 2; i < strArray.length;i+=2) {
+    			int red = min_red;
+    			int green = min_green;
+    			int blue = min_blue;
+    		
+    			if(strArray[i+1].charAt(0) == 'r') {
+    				red = Integer.parseInt(strArray[i]);
+    			} else if(strArray[i+1].charAt(0) == 'g') {
+    				green = Integer.parseInt(strArray[i]);
+    			} else if(strArray[i+1].charAt(0) == 'b') {
+    				blue = Integer.parseInt(strArray[i]);
+    			}
+    			
+    			if(red > min_red) {
+    			   min_red = red;	
+    			}
+    			
+    			if(green > min_green) {
+    				min_green = green;
+    			}
+    			
+    			if(blue > min_blue) {
+    				min_blue = blue;
+    			}
+    				
     		}
     		
-    		possible = check(red,green,blue);
-    		if(!possible) {
-    			break;
-    		}
+/*    		System.out.println("R:"+min_red +
+    				" B:"+min_blue+
+    				" G:"+min_red);
     		
-    		
+    		System.out.println(min_red*min_blue*min_green);
+  */  		
+    		cubeSum += min_red * min_blue * min_green;
     	}
     	
-    	
-    	
-    	System.out.println("POSSIBLE:" + possible);
-    	
+    	System.out.println("Cube Sum: " + cubeSum);	
     	
     }
     
-    public static boolean check(int red, int green, int blue) {
+    public static void part1(ArrayList<String> input) {
+    	int total = 0;
+    	
+    	for(int j = 0;j<input.size();j++) {
+    		boolean possible = false;
+    		String str = input.get(j);
+    		String[] strArray = str.split(" ");
+    		
+    		for(int i = 2; i < strArray.length;i+=2) {
+    			int red = 0;
+    			int green = 0;
+    			int blue = 0;
+    		
+    			if(strArray[i+1].charAt(0) == 'r') {
+    				red = Integer.parseInt(strArray[i]);
+    			} else if(strArray[i+1].charAt(0) == 'g') {
+    				green = Integer.parseInt(strArray[i]);
+    			} else if(strArray[i+1].charAt(0) == 'b') {
+    				blue = Integer.parseInt(strArray[i]);
+    			}
+    		
+    			possible = part1_check(red,green,blue);
+    			if(possible == false) {
+    				break;
+    			}
+    		}
+    		int id = j + 1;
+    		if(possible == true) {
+    		   System.out.print(id + ": " + total + "+" + id + "=");
+    		   total = total + id;	
+   		       System.out.println(total);
+    		}
+    	}
+    	
+    	System.out.println("Possible ID Sum: " + total);
+    }
+    
+    public static boolean part1_check(int red, int green, int blue) {
         boolean possible = true;
     	
     	if(RED - red < 0) {
+//    		System.out.println(RED + "-" + red + "=" + (RED - red));
     		possible = false;
     	}
     	
     	if(GREEN - green < 0) {
+//   		System.out.println(GREEN + "-" + green + "=" + (GREEN - green));
     		possible = false;
     	}
     	
     	if(BLUE - blue < 0) {
+//    		System.out.println(BLUE + "-" + blue + "=" + (BLUE - blue));
     		possible = false;
     	}
     	
