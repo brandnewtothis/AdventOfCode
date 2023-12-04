@@ -35,9 +35,6 @@ public class Driver{
    		    char last = ' ';
     		
     		for(int j = 0; j < line.length();j++) {
-    			
-    			
-    			
     		   if(Character.isDigit(line.charAt(j)) && isFirst){
     		      isFirst = false;
     		      first = line.charAt(j);
@@ -47,14 +44,11 @@ public class Driver{
     		   }
     		}
     		String digit = "" + first + last;
-    		
     		total += Integer.valueOf(digit);
     	}
     	
     	System.out.println("Total is " + total);
     	
-    	
-        
     }
     
-    }
+}
